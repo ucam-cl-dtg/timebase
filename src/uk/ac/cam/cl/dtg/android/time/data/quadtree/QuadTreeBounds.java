@@ -1,4 +1,4 @@
-package uk.ac.cam.dtg.android.time.data.quadtree;
+package uk.ac.cam.cl.dtg.android.time.data.quadtree;
 
 public class QuadTreeBounds {
 
