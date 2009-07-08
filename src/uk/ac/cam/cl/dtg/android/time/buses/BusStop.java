@@ -59,8 +59,8 @@ public class BusStop {
 	}
 	
 	public String toString() {
-	//	return "\n"+Name+" ("+stopRef+", "+Latitude+"/"+Longitude+")";
-		return Name;
+		return "\n"+Name+" ("+stopRef+", "+Latitude+"/"+Longitude+")";
+		//return Name;
 	}
 	
 }
