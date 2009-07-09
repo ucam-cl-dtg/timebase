@@ -18,31 +18,6 @@ public class QuadTreeItem<E> implements Comparable<QuadTreeItem<E>> {
 		return result;
 	}
 
-	
-	//@Override
-//	public boolean equals(Object obj) {
-		
-//		return false;
-//	}
-	/*
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		QuadTreeItem other = (QuadTreeItem) obj;
-		if (element == null) {
-			if (other.element != null)
-				return false;
-		} else if (!element.equals(other.element))
-			return false;
-		if (x != other.x)
-			return false;
-		if (y != other.y)
-			return false;
-		return true;
-	}*/
 
 	private E element;
 	private int x, y;
@@ -81,7 +56,8 @@ public class QuadTreeItem<E> implements Comparable<QuadTreeItem<E>> {
 	}
 	
 	public String toString() {
-		return element+" at ("+x+", "+y+")";
+		//return element+" at ("+x+", "+y+")";
+		return element.toString();
 	}
 
 	@Override

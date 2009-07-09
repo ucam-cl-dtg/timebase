@@ -1,5 +1,7 @@
 package uk.ac.cam.cl.dtg.android.time.data.quadtree;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -16,6 +18,9 @@ public class QuadTree<E> {
 
 	// The top level of the tree is represented by a single node
 	private QuadTreeNode<E> topNode;
+	
+	// Holds all the data items in the quadtree
+	public LinkedList<QuadTreeItem<E>> Items = new LinkedList<QuadTreeItem<E>>();
 	
 	// The proportion of a child's nodes which are visible one level up
 	private float DetailDecayFactor = 0.5f;
@@ -41,6 +46,7 @@ public class QuadTree<E> {
     public void insertItem(E item, int x, int y) throws QuadTreeException
     {
     	topNode.insertItem(item, x, y);
+    	Items.add(new QuadTreeItem<E>(item,x,y));
     }
 
     /**
@@ -93,8 +99,28 @@ public class QuadTree<E> {
 	 * @return
 	 */
 	public Set<E> getItems(QuadTreeBounds rect) {
+	//	return topNode.getItems(rect);
+		return stripQTItems(getQuadTreeItems(rect));
+	}
+	
+	public Set<QuadTreeItem<E>> getQuadTreeItems(QuadTreeBounds rect) {
 		return topNode.getItems(rect);
 	}
+	
+	   private Set<E> stripQTItems(Set<QuadTreeItem<E>> items) {
+	    	
+	    	System.out.println("====> obtainitemset called, items are "+Items);
+	    	
+	    	HashSet<E> theItems = new HashSet<E>();
+	    	
+	    	for(QuadTreeItem<E> qtItem : items) {
+	    		theItems.add(qtItem.getElement());
+	    	}
+	    	
+	    	System.out.println("====> Returning back: "+theItems);
+	    	
+	    	return theItems;
+	    }
 	
 	public String toString() {
 		return topNode.toString();

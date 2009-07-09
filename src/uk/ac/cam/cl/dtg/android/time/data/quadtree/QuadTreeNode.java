@@ -1,7 +1,9 @@
 package uk.ac.cam.cl.dtg.android.time.data.quadtree;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -12,6 +14,7 @@ class QuadTreeNode<E> {
 	
     QuadTreeBounds Bounds;
     int Depth;
+    int coordx, coordy;
     ArrayList<QuadTreeNode<E>> childNodes;
     Set<QuadTreeItem<E>> Items;
     
@@ -30,10 +33,12 @@ class QuadTreeNode<E> {
     	Bounds = NodeBounds;
     	Items = new LinkedHashSet<QuadTreeItem<E>>();
     	
+    	childNodes = new ArrayList<QuadTreeNode<E>>();
+    	
     	// Create the child nodes, but only if we're above the bottom level
     	if(NodeDepth > 1) {
     		
-	    	childNodes = new ArrayList<QuadTreeNode<E>>();
+	    	
 	    	for(int i = 0; i < (Math.pow(BranchingFactor,2)); i++)
 	    	{
 	    		// Calculate the bounds for this new node
@@ -57,7 +62,11 @@ class QuadTreeNode<E> {
 	    		
 	    		//System.out.println("Child : "+xcoord+"/"+ycoord+" : "+newbounds);
 	    		
-	    		childNodes.add(i, new QuadTreeNode<E>(NodeDepth - 1, newbounds));
+	    		QuadTreeNode<E> newChild = new QuadTreeNode<E>(NodeDepth - 1, newbounds);
+	    		newChild.coordx = xcoord;
+	    		newChild.coordy = ycoord;
+	    		
+	    		childNodes.add(i, newChild);
 	    	}
     	}
     }
@@ -77,11 +86,11 @@ class QuadTreeNode<E> {
     	
     	if(Depth == 1) {
     		
-    	//	System.out.println("Item "+item+" inserted into child node covering "+Bounds);
+    		//System.out.println("Item "+item+" inserted into child node covering "+Bounds);
 
     		Items.add(new QuadTreeItem<E>(item,x,y));
     		
-    	///	System.out.println("Node now contains: "+getItems());
+    		//System.out.println("Node now contains: "+getItems());
     		
     	} else {
     		
@@ -95,6 +104,8 @@ class QuadTreeNode<E> {
     		int xcoord = (int) Math.floor(proportion_x * BranchingFactor);
     		int ycoord = (int) Math.floor(proportion_y * BranchingFactor);
     		
+    		//System.out.println("Trying to insert into child with coords "+xcoord+"/"+ycoord+" we have "+childNodes.size());
+    		
     		childNodes.get(xcoord * BranchingFactor + ycoord).insertItem(item, x, y);
    		
     		
@@ -106,16 +117,21 @@ class QuadTreeNode<E> {
      */
     public void propagateItems() {
     	
+
+    	
     	// Are we a leaf node? If so do nothing.
     	if(Depth == 1) return;
     	
     	// Ask our children to propagate themselves first.
     	for(QuadTreeNode<E> child : childNodes) {
     		child.propagateItems();
-    		
+    	 	// debug
+        	//System.out.println("================\nPROPAGATION FOR: "+child+"\n============");
+    	
+       	
     		// Now take the appropriate number of items from the child and add to ours
-    		int numToTake = (int) Math.ceil(DetailDecayFactor * child.Items.size());
-    		System.out.println("Taking "+numToTake+" from child. Decay factor is "+DetailDecayFactor);
+    		int numToTake = (int)( Math.round(DetailDecayFactor * child.Items.size()));
+    		System.out.println("Child has "+child.Items.size()+" Taking "+numToTake+" from child. Decay factor is "+DetailDecayFactor);
     		
     		// Iterate through child's items, taking items until we hit limit
     		int i = 0;
@@ -161,7 +177,7 @@ class QuadTreeNode<E> {
 	}
     
     public String toString() {
-     	return "[NODE Level " + Depth + " covers "+Bounds+" items: "+Items.size()+" Children: "+childNodes.size()+"]";
+     	return "[NODE Level " + Depth + " "+coordx+"/"+coordy+" covers "+Bounds+" items: "+Items.size()+" Children: "+childNodes.size()+"]\n";
      	  
     }
     
@@ -170,10 +186,83 @@ class QuadTreeNode<E> {
      * according to how large the rectangle is.
      * @param rect
      */
-    protected Set<E> getItems(QuadTreeBounds rect) {
+    protected Set<QuadTreeItem<E>> getItems(QuadTreeBounds rect) {
     	
-    	return new Set<E>(); // TODO: Implement!!! :)
+    	System.out.println("GetItems() called on "+this+" with rect "+rect);
+    	
+    	// Are we a leaf? If so then all we can do is return all the items we have
+    	// stored right now.
+    	if(Depth == 1) {
+    		System.out.println("> getItems just been called on me but I'm a leaf.");
+    		//return obtainItemSet();
+    		return Items;
+    	}
+    	
+    	/*
+    	 * We're not a leaf. Then we have 2 courses of action:
+    	 * 
+    	 * 1) If rect covers 1, 2 or 4 of our child nodes then call getItems on each and
+    	 * return the union of their result. If they're leaves, we just get all the items
+    	 * in those areas. If they're not leaves, then more recursive calls happen.
+    	 * 
+    	 * Why 1, 2 and 4 and not just 1? To stop the edge cases where rect
+    	 * is very small but spanning two / four child nodes.
+    	 * 
+    	 * 2) Otherwise return the UNION of every child node covered by rect. If they're leaves
+    	 * then we will just get the same result as point 1) above, but if they're *not* then
+    	 * because we don't do recursive calls into the covered child nodes we just end up
+    	 * returning a limited subset of all the nodes that reside in the children.
+    	 */
+    	
+  	
+    	System.out.println("We're not leaf, count how many overlap.");
+    	
+    	// List to hold overlap
+    	LinkedList<QuadTreeNode<E>> overlappedNodes = new LinkedList<QuadTreeNode<E>>();
+    	
+    	for(QuadTreeNode<E> child : childNodes) {
+    		
+    		if(child.Bounds.overlaps(rect))
+    		{
+    			overlappedNodes.add(child);
+    		}
+ 
+    	}
+    	
+    	System.out.println(overlappedNodes.size()+" child nodes overlap.");
+    	
+    	// Set to hold results
+    	Set<QuadTreeItem<E>> theResults = new HashSet<QuadTreeItem<E>>();
+    	int overlapCount = overlappedNodes.size();
+    	
+    	// Overlaps with 1, 2 or 4
+    	if(overlapCount == 1 || overlapCount == 2 || overlapCount == 4) {
+    		
+    		System.out.println("==> Asking for getItems() from each of the children");
+    		for(QuadTreeNode<E> overlapped : overlappedNodes) {
+    			theResults.addAll(overlapped.getItems(rect));
+    			System.out.println("==> Our results now contain: "+theResults);
+    		}
+     	} else if(overlapCount == Math.pow(BranchingFactor, 2)){
+     		theResults = Items;
+     	} else {
+    		for(QuadTreeNode<E> overlapped : overlappedNodes) {
+    			System.out.println("==> Adding items from overlapped node to result set: "+overlapped.Items);
+    			theResults.addAll(overlapped.Items);
+    			System.out.println("==> Our results now contain: "+theResults);
+    		}    		
+     	}
+    	
+    	System.out.println("> Returning back: "+theResults);
+    	return theResults;
+    	
     }
+    
+    /**
+     * Returns a set of all the items held by the QuadTreeNode.
+     * @return All items held by the QuadTreeNode.
+     */
+ 
     
   
     
