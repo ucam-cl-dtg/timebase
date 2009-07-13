@@ -104,9 +104,15 @@ class QuadTreeNode<E> {
     		int xcoord = (int) Math.floor(proportion_x * BranchingFactor);
     		int ycoord = (int) Math.floor(proportion_y * BranchingFactor);
     		
+    		// Edge case (literally :) )
+    		if(xcoord == BranchingFactor) xcoord--;
+    		if(ycoord == BranchingFactor) ycoord--;
+    		
+    		int childnum = xcoord * BranchingFactor + ycoord;
+    		//System.out.println("Inserting ("+x+"/"+y+"). x-c/y-c: ("+xcoord+"/"+ycoord+"). Going to child "+childnum+" we have "+childNodes.size()+" children. Our bounds: "+Bounds+" p-x/p-y:"+proportion_x+"/"+proportion_y);
     		//System.out.println("Trying to insert into child with coords "+xcoord+"/"+ycoord+" we have "+childNodes.size());
     		
-    		childNodes.get(xcoord * BranchingFactor + ycoord).insertItem(item, x, y);
+    		childNodes.get(childnum).insertItem(item, x, y);
    		
     		
     	}
@@ -131,7 +137,7 @@ class QuadTreeNode<E> {
        	
     		// Now take the appropriate number of items from the child and add to ours
     		int numToTake = (int)( Math.round(DetailDecayFactor * child.Items.size()));
-    		System.out.println("Child has "+child.Items.size()+" Taking "+numToTake+" from child. Decay factor is "+DetailDecayFactor);
+    		//System.out.println("Child has "+child.Items.size()+" Taking "+numToTake+" from child. Decay factor is "+DetailDecayFactor);
     		
     		// Iterate through child's items, taking items until we hit limit
     		int i = 0;
@@ -188,12 +194,12 @@ class QuadTreeNode<E> {
      */
     protected Set<QuadTreeItem<E>> getItems(QuadTreeBounds rect) {
     	
-    	System.out.println("GetItems() called on "+this+" with rect "+rect);
+    //	System.out.println("GetItems() called on "+this+" with rect "+rect);
     	
     	// Are we a leaf? If so then all we can do is return all the items we have
     	// stored right now.
     	if(Depth == 1) {
-    		System.out.println("> getItems just been called on me but I'm a leaf.");
+    	//	System.out.println("> getItems just been called on me but I'm a leaf.");
     		//return obtainItemSet();
     		return Items;
     	}
@@ -215,7 +221,7 @@ class QuadTreeNode<E> {
     	 */
     	
   	
-    	System.out.println("We're not leaf, count how many overlap.");
+    //	System.out.println("We're not leaf, count how many overlap.");
     	
     	// List to hold overlap
     	LinkedList<QuadTreeNode<E>> overlappedNodes = new LinkedList<QuadTreeNode<E>>();
@@ -229,7 +235,7 @@ class QuadTreeNode<E> {
  
     	}
     	
-    	System.out.println(overlappedNodes.size()+" child nodes overlap.");
+    //	System.out.println(overlappedNodes.size()+" child nodes overlap.");
     	
     	// Set to hold results
     	Set<QuadTreeItem<E>> theResults = new HashSet<QuadTreeItem<E>>();
@@ -238,22 +244,22 @@ class QuadTreeNode<E> {
     	// Overlaps with 1, 2 or 4
     	if(overlapCount == 1 || overlapCount == 2 || overlapCount == 4) {
     		
-    		System.out.println("==> Asking for getItems() from each of the children");
+    		//System.out.println("==> Asking for getItems() from each of the children");
     		for(QuadTreeNode<E> overlapped : overlappedNodes) {
     			theResults.addAll(overlapped.getItems(rect));
-    			System.out.println("==> Our results now contain: "+theResults);
+    		//	System.out.println("==> Our results now contain: "+theResults);
     		}
-     	} else if(overlapCount == Math.pow(BranchingFactor, 2)){
-     		theResults = Items;
+     	//} else if(overlapCount == Math.pow(BranchingFactor, 2)){
+     	//	theResults = Items;
      	} else {
     		for(QuadTreeNode<E> overlapped : overlappedNodes) {
-    			System.out.println("==> Adding items from overlapped node to result set: "+overlapped.Items);
+    			//System.out.println("==> Adding items from overlapped node to result set: "+overlapped.Items);
     			theResults.addAll(overlapped.Items);
-    			System.out.println("==> Our results now contain: "+theResults);
+    		//	System.out.println("==> Our results now contain: "+theResults);
     		}    		
      	}
     	
-    	System.out.println("> Returning back: "+theResults);
+    	//System.out.println("> Returning back: "+theResults);
     	return theResults;
     	
     }
