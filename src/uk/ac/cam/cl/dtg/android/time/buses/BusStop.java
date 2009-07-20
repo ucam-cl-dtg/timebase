@@ -1,18 +1,21 @@
 package uk.ac.cam.cl.dtg.android.time.buses;
 
+import java.io.Serializable;
+
 /**
  * Represents a bus stop
  * 
  * @author dt316
  *
  */
-public class BusStop {
+public class BusStop implements Serializable {
 	
 
-	private String Name;
+	private String Name = "";
 	private double Latitude;
 	private double Longitude;
-	private String stopRef;
+	private String stopRef = "";
+	private String smsCode = "";
 
 
 	public BusStop(String name, double latitude, double longitude,
@@ -61,6 +64,14 @@ public class BusStop {
 	public String toString() {
 		return "\n"+Name+" ("+stopRef+", "+Latitude+"/"+Longitude+")";
 		//return Name;
+	}
+
+	public void setSmsCode(String smsCode) {
+		this.smsCode = smsCode;
+	}
+
+	public String getSmsCode() {
+		return smsCode;
 	}
 	
 }

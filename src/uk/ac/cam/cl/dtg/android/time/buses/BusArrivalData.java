@@ -7,6 +7,7 @@ public class BusArrivalData {
 	public String smsCode;
 	public LinkedList<BusArrival> NextBuses = new LinkedList<BusArrival>();
 	public String Timestamp;
+	public String Information = "";
 	
 	public BusArrivalData() {
 		

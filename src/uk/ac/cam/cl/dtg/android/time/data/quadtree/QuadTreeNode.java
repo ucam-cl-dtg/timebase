@@ -95,7 +95,7 @@ class QuadTreeNode<E> {
     	} else {
     		
     		// Is the item outside our bounds?
-    		if(!Bounds.contains(x, y)) throw new QuadTreeException("Trying to insert item "+item+" outside the tree bounds");
+    		if(!Bounds.contains(x, y)) throw new QuadTreeException("Trying to insert outside tree bounds. Bounds are "+Bounds+", co-ords are "+x+"/"+y);
     		
     		// Calculate within which child node the item lies
     		float proportion_x = (float)(x - Bounds.getLeft()) / Bounds.getWidth();
