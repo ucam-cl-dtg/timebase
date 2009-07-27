@@ -4,11 +4,16 @@ public class BusArrival {
 
 	String serviceID;
 	String destination;
-	String dueTime;
+	ArrivalTime dueTime;
 	
 	public BusArrival(String service, String dest, String due) {
 		serviceID = service;
-		dueTime = due;
+		try {
+			dueTime = new ArrivalTime(due);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
+		}
 		destination = dest;
 	}
 	
@@ -28,11 +33,11 @@ public class BusArrival {
 		this.destination = destination;
 	}
 
-	public String getDueTime() {
+	public ArrivalTime getDueTime() {
 		return dueTime;
 	}
 
-	public void setDueTime(String dueTime) {
+	public void setDueTime(ArrivalTime dueTime) {
 		this.dueTime = dueTime;
 	}
 

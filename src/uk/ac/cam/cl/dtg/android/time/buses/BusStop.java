@@ -1,6 +1,7 @@
 package uk.ac.cam.cl.dtg.android.time.buses;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * Represents a bus stop
@@ -16,6 +17,7 @@ public class BusStop implements Serializable {
 	private double Longitude;
 	private String stopRef = "";
 	private String smsCode = "";
+	private HashMap<String, Object> meta = new HashMap<String, Object>();
 
 
 	public BusStop(String name, double latitude, double longitude,
@@ -27,6 +29,14 @@ public class BusStop implements Serializable {
 		Name = name;
 		this.stopRef = stopRef;
 		
+	}
+	
+	public void setMeta(String tag, Object obj) {
+		meta.put(tag, obj);
+	}
+	
+	public Object getMeta(String tag) {
+		return meta.get(tag);
 	}
 
 	public void setName(String name) {
