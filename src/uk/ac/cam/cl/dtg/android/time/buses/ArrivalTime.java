@@ -1,12 +1,13 @@
 package uk.ac.cam.cl.dtg.android.time.buses;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class ArrivalTime extends Date {
+public class ArrivalTime extends Date implements Serializable {
 	
 	public boolean isDue = false;
 	public boolean isUnknown = false;
@@ -109,7 +110,7 @@ public class ArrivalTime extends Date {
 			
 			String mindiff = f.format(diff);
 			
-			if(mindiff.equals("0")) {
+			if(mindiff.equals("0") || diff.getTime() < 0) {
 				isDue = true;
 				return "Due";
 			} else {
@@ -122,6 +123,13 @@ public class ArrivalTime extends Date {
 			DateFormat f = new SimpleDateFormat("HH:mm");			
 			return f.format(this);
 		}
+		
+	}
+	
+	public String getArrivalTime() {
+		
+		DateFormat f = new SimpleDateFormat("HH:mm");			
+		return f.format(this);
 		
 	}
 }

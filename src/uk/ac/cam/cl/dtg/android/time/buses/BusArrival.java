@@ -1,6 +1,8 @@
 package uk.ac.cam.cl.dtg.android.time.buses;
 
-public class BusArrival {
+import java.io.Serializable;
+
+public class BusArrival implements Serializable {
 
 	String serviceID;
 	String destination;
@@ -11,7 +13,6 @@ public class BusArrival {
 		try {
 			dueTime = new ArrivalTime(due);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.err.println(e.getMessage());
 		}
 		destination = dest;
