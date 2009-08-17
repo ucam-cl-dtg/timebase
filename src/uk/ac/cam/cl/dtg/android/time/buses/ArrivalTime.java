@@ -12,6 +12,11 @@ public class ArrivalTime extends Date implements Serializable {
 	public boolean isDue = false;
 	public boolean isUnknown = false;
 	public boolean isLiveData = false;
+	
+	public ArrivalTime(long time) {
+		super();
+		this.setTime(time);
+	}
 
 	public ArrivalTime(String arrivalString) {
 		

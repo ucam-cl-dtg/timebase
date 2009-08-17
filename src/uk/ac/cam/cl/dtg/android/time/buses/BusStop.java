@@ -72,7 +72,7 @@ public class BusStop implements Serializable {
 	}
 	
 	public String toString() {
-		return "\n"+Name+" ("+stopRef+", "+Latitude+"/"+Longitude+")";
+		return Name+" ("+stopRef+", "+Latitude+"/"+Longitude+")\n";
 		//return Name;
 	}
 

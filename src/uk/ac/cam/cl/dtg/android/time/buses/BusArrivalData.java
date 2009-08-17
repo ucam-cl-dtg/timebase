@@ -8,6 +8,7 @@ public class BusArrivalData {
 	public LinkedList<BusArrival> NextBuses = new LinkedList<BusArrival>();
 	public String Timestamp;
 	public String Information = "";
+	public String stopName = ""; 
 	
 	public BusArrivalData() {
 		

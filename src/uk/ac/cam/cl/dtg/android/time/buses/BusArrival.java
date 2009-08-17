@@ -18,6 +18,12 @@ public class BusArrival implements Serializable {
 		destination = dest;
 	}
 	
+	public BusArrival(String service, String dest, long dueTime) {
+		serviceID = service;
+		destination = dest;
+		this.dueTime = new ArrivalTime(dueTime);
+	}
+	
 	public String getServiceID() {
 		return serviceID;
 	}
@@ -40,6 +46,10 @@ public class BusArrival implements Serializable {
 
 	public void setDueTime(ArrivalTime dueTime) {
 		this.dueTime = dueTime;
+	}
+	
+	public void setDueTime(long dueTime) {
+		this.dueTime = new ArrivalTime(dueTime);
 	}
 
 	public String toString() {
