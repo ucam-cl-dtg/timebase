@@ -85,7 +85,7 @@ public class TransportDataProvider {
 		try {
 			
 			/* Create a URL we want to load some xml-data from. */
-			URL url = new URL(feedURL+"GetStopInfo?key="+apiKey+"&ref="+stopRef+"&numarrivals="+numberToFetch);
+			URL url = new URL(feedURL+"GetArrivals?key="+apiKey+"&atco="+stopRef+"&numarrivals="+numberToFetch);
 
 			/* Get a SAXParser from the SAXPArserFactory. */
 			SAXParserFactory spf = SAXParserFactory.newInstance();
