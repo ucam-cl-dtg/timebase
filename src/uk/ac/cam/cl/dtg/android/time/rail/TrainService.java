@@ -6,9 +6,12 @@ public class TrainService {
 	public String originCRS;
 	public String destName;
 	public String destCRS;
+	public String via;
 	
 	public String sta;
 	public String eta;
+	public	String std;
+	public String etd;
 	
 	public String platform;
 	public String TOC;
@@ -69,6 +72,24 @@ public class TrainService {
 		this.serviceID = serviceID;
 	}
 	
+	public String getStd() {
+		return std;
+	}
+	public void setStd(String std) {
+		this.std = std;
+	}
+	public String getEtd() {
+		return etd;
+	}
+	public void setEtd(String etd) {
+		this.etd = etd;
+	}
+	public String getVia() {
+		return via;
+	}
+	public void setVia(String via) {
+		this.via = via;
+	}
 	public String toString() {
 		return "[" + sta + "] "+originName+"-"+destName + "("+eta+") Operated by "+TOC+" platform? "+platform;
 	}

@@ -107,11 +107,11 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 			
 		} else if(qName.equals("std")) {
 
-			service.setSta(v);
+			service.setStd(v);
 			
 		} else if(qName.equals("etd")) {
 
-			service.setEta(v);
+			service.setEtd(v);
 			
 		} else if(qName.equals("platform")) {
 
@@ -120,6 +120,10 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 		} else if(qName.equals("operator")) {
 
 			service.setTOC(v);
+			
+		} else if(qName.equals("via")) {
+
+			service.setVia(v);
 			
 		}
 
