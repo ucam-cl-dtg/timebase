@@ -17,6 +17,14 @@ public class TrainService {
 	public String TOC;
 	public String serviceID;
 	
+	boolean isCircular = false;
+	
+	public boolean isCircular() {
+		return isCircular;
+	}
+	public void setCircular(boolean isCircular) {
+		this.isCircular = isCircular;
+	}
 	public String getOriginName() {
 		return originName;
 	}

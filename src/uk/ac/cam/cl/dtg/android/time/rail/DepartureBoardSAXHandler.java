@@ -23,6 +23,7 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 	
 	TrainService service;
 	List<TrainService> allServices;
+	ServiceBoard board;
 	
 	boolean isOrigin = false;
 	boolean isDest = false;
@@ -34,7 +35,7 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 	public void startDocument() throws SAXException {
 		
 		allServices = new LinkedList<TrainService>();
-		
+		board = new ServiceBoard(new Station("",""),null);
 	}
 
 	@Override
@@ -99,11 +100,13 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 
 			if(isOrigin) service.setOriginName(v);
 			if(isDest) service.setDestName(v);
+			if(!isOrigin && !isDest) board.getStation().setName(v);
 			
 		} else if(qName.equals("crs")) {
 
 			if(isOrigin) service.setOriginCRS(v);
 			if(isDest) service.setDestCRS(v);
+			if(!isOrigin && !isDest) board.getStation().setCRS(v);
 			
 		} else if(qName.equals("std")) {
 
@@ -112,6 +115,13 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 		} else if(qName.equals("etd")) {
 
 			service.setEtd(v);
+		} else if(qName.equals("sta")) {
+
+			service.setSta(v);
+			
+		} else if(qName.equals("eta")) {
+
+			service.setEta(v);
 			
 		} else if(qName.equals("platform")) {
 
@@ -124,6 +134,10 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 		} else if(qName.equals("via")) {
 
 			service.setVia(v);
+			
+		} else if(qName.equals("isCircularRoute")) {
+
+			if(v.equals("true")) service.setCircular(true);
 			
 		}
 
@@ -139,8 +153,10 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 		sb.append(temp);
 	}
 	
-	public List<TrainService> getData() {
-		return allServices;
+	public ServiceBoard getData() {
+		
+		board.setServices(allServices);
+		return board;
 	}
 }
 
