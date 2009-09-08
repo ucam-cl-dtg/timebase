@@ -1,6 +1,8 @@
 package uk.ac.cam.cl.dtg.android.time.rail;
 
-public class Station {
+import java.io.Serializable;
+
+public class Station implements Serializable {
 
 	String name;
 	String CRS;
@@ -21,6 +23,14 @@ public class Station {
 	}
 	public void setCRS(String cRS) {
 		CRS = cRS;
+	}
+	
+	public boolean equals(Station s) {
+		System.out.println("Is "+s+" equal to "+this);
+		return (s.CRS == CRS);
+	}
+	public String toString() {
+		return getName() + " (" + getCRS() + ")";
 	}
 	
 }

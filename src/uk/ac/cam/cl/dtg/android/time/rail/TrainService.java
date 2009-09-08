@@ -1,5 +1,7 @@
 package uk.ac.cam.cl.dtg.android.time.rail;
 
+import java.util.Vector;
+
 public class TrainService {
 
 	public String originName;
@@ -7,6 +9,9 @@ public class TrainService {
 	public String destName;
 	public String destCRS;
 	public String via;
+	
+	public Vector<Station> destinations;
+	public Station origin;
 	
 	public String sta;
 	public String eta;

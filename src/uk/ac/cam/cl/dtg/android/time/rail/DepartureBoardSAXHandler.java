@@ -2,12 +2,11 @@ package uk.ac.cam.cl.dtg.android.time.rail;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import uk.ac.cam.cl.dtg.android.time.buses.*;
 
 
 /**
@@ -27,6 +26,8 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 	
 	boolean isOrigin = false;
 	boolean isDest = false;
+	
+	Station currDest;
 	
 	// ===========================================================
 	// Methods
@@ -57,15 +58,21 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 		if(qName.equals("service")) {
 
 			service = new TrainService();
+			service.destinations = new Vector<Station>();
 			
 		} else if(qName.equals("origin")) {
 
 			isOrigin = true;
+			service.origin = new Station("","");
 			
 		} else if(qName.equals("destination")) {
 
 			isDest = true;
 			
+			
+		} else if(qName.equals("location")) {
+			
+			if(isDest) currDest = new Station("","");
 		}
 		
 		// empty the string
@@ -82,7 +89,7 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 		String v = sb.toString();
 		if(qName.length() == 0) qName = localName;
 		
-		System.out.println("END TAG "+qName+" data: "+v);
+		//System.out.println("END TAG "+qName+" data: "+v);
 		
 		if(qName.equals("service")) {
 			
@@ -90,23 +97,31 @@ public class DepartureBoardSAXHandler extends DefaultHandler {
 			
 		} else if(qName.equals("origin")) {
 
-			isOrigin = false;
+			isOrigin = false;			
 			
 		} else if(qName.equals("destination")) {
 
-			isDest = false;
+			isDest = false;					
+			
+		} else if(qName.equals("location")) {
+			
+			if(isDest) service.destinations.add(currDest);
 			
 		} else if(qName.equals("locationName")) {
 
-			if(isOrigin) service.setOriginName(v);
-			if(isDest) service.setDestName(v);
+			if(isOrigin) service.origin.setName(v);
+			if(isDest) currDest.setName(v);
 			if(!isOrigin && !isDest) board.getStation().setName(v);
 			
 		} else if(qName.equals("crs")) {
 
-			if(isOrigin) service.setOriginCRS(v);
-			if(isDest) service.setDestCRS(v);
+			if(isOrigin) service.origin.setCRS(v);
+			if(isDest) currDest.setCRS(v);
 			if(!isOrigin && !isDest) board.getStation().setCRS(v);
+			
+		} else if(qName.equals("serviceID")) {
+
+			service.setServiceID(v);
 			
 		} else if(qName.equals("std")) {
 
