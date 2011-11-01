@@ -66,8 +66,7 @@ public class TransportDataProvider {
 			return theHandler.getData();
 			
 		} catch (Exception e) {
-			
-			throw new TransportDataException(e.getMessage());
+			throw new TransportDataException(e);
 
 		}
 		
@@ -106,7 +105,7 @@ public class TransportDataProvider {
 			
 		} catch (Exception e) {
 			
-			throw new TransportDataException(e.getMessage());
+			throw new TransportDataException(e);
 
 		}
 		
@@ -144,7 +143,7 @@ public class TransportDataProvider {
 			
 		} catch (Exception e) {
 			
-			throw new TransportDataException(e.getMessage());
+			throw new TransportDataException(e);
 
 		}
 		
