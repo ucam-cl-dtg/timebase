@@ -21,7 +21,21 @@ import org.xml.sax.XMLReader;
 
 public class LiveDepartureBoard {
 
-	public static ServiceBoard getDepartures(String CRS, int numDeps) {
+  /**
+   * Exception thrown when error occurred talking to remote services
+   * @author drt24
+   *
+   */
+  public static class RemoteException extends Exception {
+    private static final long serialVersionUID = 1L;
+
+    protected RemoteException(String message, Throwable t){
+      super(message,t);
+    }
+  }
+  private static final String BOARDS_ADDRESS = "http://www.livedepartureboards.co.uk/ldbws/ldb2.asmx";
+  
+	public static ServiceBoard getDepartures(String CRS, int numDeps) throws RemoteException {
 
 		try { // Required for the I/O
 			URL	url;
@@ -30,7 +44,7 @@ public class LiveDepartureBoard {
 			DataInputStream	input;
 
 			// URL of CGI-Bin script.
-			url = new URL ("http://www.livedepartureboards.co.uk/ldbws/ldb2.asmx");
+			url = new URL (BOARDS_ADDRESS);
 
 			// URL connection channel.
 			urlConn = url.openConnection();
@@ -85,14 +99,11 @@ public class LiveDepartureBoard {
 			return theHandler.getData();
 
 		} catch (Exception e) {
-			System.out.println("Exception thrown");
-			System.out.println(e.getMessage());
-			return null;
-
+			throw new RemoteException("While getting departures for " + CRS,e);
 		}
 	}
 
-	public static ServiceBoard getArrivals(String CRS, int numArrs) {
+	public static ServiceBoard getArrivals(String CRS, int numArrs) throws RemoteException {
 
 		try { // Required for the I/O
 			URL	url;
@@ -101,7 +112,7 @@ public class LiveDepartureBoard {
 			DataInputStream	input;
 
 			// URL of CGI-Bin script.
-			url = new URL ("http://www.livedepartureboards.co.uk/ldbws/ldb2.asmx");
+			url = new URL (BOARDS_ADDRESS);
 
 			// URL connection channel.
 			urlConn = url.openConnection();
@@ -156,14 +167,11 @@ public class LiveDepartureBoard {
 			return theHandler.getData();
 
 		} catch (Exception e) {
-			System.out.println("Exception thrown");
-			System.out.println(e.getMessage());
-			return null;
-
+		  throw new RemoteException("While getting arrivals for " + CRS,e);
 		}
 	}
 
-	public static ServiceBoard getArrivalsDepartures(String CRS, int numServices) {
+	public static ServiceBoard getArrivalsDepartures(String CRS, int numServices) throws RemoteException {
 
 		try { // Required for the I/O
 			URL	url;
@@ -172,7 +180,7 @@ public class LiveDepartureBoard {
 			DataInputStream	input;
 
 			// URL of CGI-Bin script.
-			url = new URL ("http://www.livedepartureboards.co.uk/ldbws/ldb2.asmx");
+			url = new URL (BOARDS_ADDRESS);
 
 			// URL connection channel.
 			urlConn = url.openConnection();
@@ -227,10 +235,7 @@ public class LiveDepartureBoard {
 			return theHandler.getData();
 
 		} catch (Exception e) {
-			System.out.println("Exception thrown");
-			System.out.println(e.getMessage());
-			return null;
-
+		  throw new RemoteException("While getting arrivals and departures for " + CRS,e);
 		}
 	}
 
@@ -242,7 +247,7 @@ public class LiveDepartureBoard {
 		DataInputStream	input;
 
 		// URL of CGI-Bin script.
-		url = new URL ("http://www.livedepartureboards.co.uk/ldbws/ldb2.asmx");
+		url = new URL (BOARDS_ADDRESS);
 
 		// URL connection channel.
 		urlConn = url.openConnection();
@@ -302,7 +307,7 @@ public class LiveDepartureBoard {
 
 		return theHandler.getDetails();
 	}
-	public static ServiceDetails getServiceDetails(String serviceID) {
+	public static ServiceDetails getServiceDetails(String serviceID) throws RemoteException {
 
 		try { // Required for the I/O
 			
@@ -405,10 +410,7 @@ public class LiveDepartureBoard {
 
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Exception thrown");
-			System.out.println(e.getMessage());
-			return null;
+		  throw new RemoteException("While getting service details for " + serviceID,e);
 		}
 	}
 	
