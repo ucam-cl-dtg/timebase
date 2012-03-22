@@ -20,7 +20,7 @@ public class ServiceDetailsSAXHandler extends DefaultHandler {
 
 	ServiceDetails service;
 
-	Vector currItinery;
+	Vector<CallingPoint> currItinery;
 	CallingPoint currCallingPoint;
 
 	boolean isCallingPoint = false;
