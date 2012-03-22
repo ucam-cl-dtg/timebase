@@ -15,7 +15,7 @@ class QuadTreeNode<E> {
     int Depth;
     int coordx, coordy;
     ArrayList<QuadTreeNode<E>> childNodes;
-    Set<QuadTreeItem<E>> Items;
+    Set<QuadTreeItem<E>> items;
     
 	// The proportion of a child's nodes which are visible one level up
 	private float DetailDecayFactor = 0.5f;
@@ -30,7 +30,7 @@ class QuadTreeNode<E> {
     	
     	Depth = NodeDepth;
     	Bounds = NodeBounds;
-    	Items = new LinkedHashSet<QuadTreeItem<E>>();
+    	items = new LinkedHashSet<QuadTreeItem<E>>();
     	
     	childNodes = new ArrayList<QuadTreeNode<E>>();
     	
@@ -87,7 +87,7 @@ class QuadTreeNode<E> {
     		
     		//System.out.println("Item "+item+" inserted into child node covering "+Bounds);
 
-    		Items.add(new QuadTreeItem<E>(item,x,y));
+    		items.add(new QuadTreeItem<E>(item,x,y));
     		
     		//System.out.println("Node now contains: "+getItems());
     		
@@ -135,19 +135,19 @@ class QuadTreeNode<E> {
     	
        	
     		// Now take the appropriate number of items from the child and add to ours
-    		int numToTake = (int)( Math.round(DetailDecayFactor * child.Items.size()));
+    		int numToTake = (int)( Math.round(DetailDecayFactor * child.items.size()));
     		//System.out.println("Child has "+child.Items.size()+" Taking "+numToTake+" from child. Decay factor is "+DetailDecayFactor);
     		
     		// Iterate through child's items, taking items until we hit limit
     		int i = 0;
-    		for(QuadTreeItem<E> item : child.Items) {
+    		for(QuadTreeItem<E> item : child.items) {
     			
     			// Break when we've taken enough
     			i++;  			
     			if(i > numToTake) break;
     			
     			// Otherwise add to our own items collection    			
-    			boolean didwe = Items.add(item);
+    			items.add(item);
     			//System.out.println("-- Taking "+item+" from child. Our items are now: "+Items+" Did we do it? "+didwe);
     			
     			
@@ -162,7 +162,7 @@ class QuadTreeNode<E> {
      */
     public Set<QuadTreeItem<E>> getItems() {
     	
-    	return Items;
+    	return items;
     }
 
 	protected float getDetailDecayFactor() {
@@ -182,7 +182,7 @@ class QuadTreeNode<E> {
 	}
     
     public String toString() {
-     	return "[NODE Level " + Depth + " "+coordx+"/"+coordy+" covers "+Bounds+" items: "+Items.size()+" Children: "+childNodes.size()+"]\n";
+     	return "[NODE Level " + Depth + " "+coordx+"/"+coordy+" covers "+Bounds+" items: "+items.size()+" Children: "+childNodes.size()+"]\n";
      	  
     }
     
@@ -200,7 +200,7 @@ class QuadTreeNode<E> {
     	if(Depth == 1) {
     	//	System.out.println("> getItems just been called on me but I'm a leaf.");
     		//return obtainItemSet();
-    		return Items;
+    		return items;
     	}
     	
     	/*
@@ -253,7 +253,7 @@ class QuadTreeNode<E> {
      	} else {
     		for(QuadTreeNode<E> overlapped : overlappedNodes) {
     			//System.out.println("==> Adding items from overlapped node to result set: "+overlapped.Items);
-    			theResults.addAll(overlapped.Items);
+    			theResults.addAll(overlapped.items);
     		//	System.out.println("==> Our results now contain: "+theResults);
     		}    		
      	}
