@@ -1,13 +1,12 @@
 package uk.ac.cam.cl.dtg.android.time.data.handlers;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import uk.ac.cam.cl.dtg.android.time.buses.*;
+import uk.ac.cam.cl.dtg.android.time.buses.ArrivalTime;
+import uk.ac.cam.cl.dtg.android.time.buses.BusArrival;
+import uk.ac.cam.cl.dtg.android.time.buses.BusArrivalData;
 
 
 /**
@@ -124,10 +123,8 @@ public class ArrivalsSAXHandler extends DefaultHandler {
 	
 	@Override
 	public void characters(char ch[], int start, int length) {			
-		
 		char[] temp = new char[length];
-		System.arraycopy(ch, start, temp, 0, length);			
-		String v = String.valueOf(temp);			
+		System.arraycopy(ch, start, temp, 0, length);						
 		sb.append(temp);
 	}
 	

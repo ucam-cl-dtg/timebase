@@ -91,10 +91,8 @@ public class StopIndividualSAXHandler extends DefaultHandler {
 	
 	@Override
 	public void characters(char ch[], int start, int length) {			
-		
 		char[] temp = new char[length];
-		System.arraycopy(ch, start, temp, 0, length);			
-		String v = String.valueOf(temp);			
+		System.arraycopy(ch, start, temp, 0, length);						
 		sb.append(temp);
 	}
 	

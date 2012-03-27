@@ -14,14 +14,14 @@ import java.util.List;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.json.*;
-import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.DefaultHandler;
-import uk.ac.cam.cl.dtg.android.time.buses.*;
-import uk.ac.cam.cl.dtg.android.time.data.handlers.*;
+
+import uk.ac.cam.cl.dtg.android.time.buses.BusArrivalData;
+import uk.ac.cam.cl.dtg.android.time.buses.BusStop;
+import uk.ac.cam.cl.dtg.android.time.data.handlers.ArrivalsSAXHandler;
+import uk.ac.cam.cl.dtg.android.time.data.handlers.GetStopsSAXHandler;
+import uk.ac.cam.cl.dtg.android.time.data.handlers.StopIndividualSAXHandler;
 
 public class TransportDataProvider {
 

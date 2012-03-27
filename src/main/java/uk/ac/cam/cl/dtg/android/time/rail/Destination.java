@@ -2,7 +2,7 @@ package uk.ac.cam.cl.dtg.android.time.rail;
 
 import uk.ac.cam.cl.dtg.android.time.buses.ArrivalTime;
 
-public class Destination implements Comparable {
+public class Destination implements Comparable<Destination> {
 
 	TrainService service;
 	CallingPoint dest;
@@ -19,10 +19,7 @@ public class Destination implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object arg0) {
-		
-		Destination other = (Destination) arg0;
-		
+	public int compareTo(Destination other) {		
 		ArrivalTime us = new ArrivalTime(dest.scheduled);
 		ArrivalTime them = new ArrivalTime(other.dest.scheduled);
 		

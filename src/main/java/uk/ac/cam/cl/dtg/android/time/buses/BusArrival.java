@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class BusArrival implements Serializable {
 
+	private static final long serialVersionUID = -9046897187435560242L;
+	
 	String serviceID;
 	String destination;
 	ArrivalTime dueTime;

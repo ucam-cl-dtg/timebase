@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 
 public class ArrivalTime extends Date implements Serializable {
 	
+	private static final long serialVersionUID = -7891776024595687288L;
+	
 	public boolean isDue = false;
 	public boolean isUnknown = false;
 	public boolean isLiveData = false;

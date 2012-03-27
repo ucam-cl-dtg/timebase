@@ -5,10 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;

@@ -20,7 +20,7 @@ public class ServiceDetailsSAXHandler extends DefaultHandler {
 
 	ServiceDetails service;
 
-	Vector currItinery;
+	Vector<CallingPoint> currItinery;
 	CallingPoint currCallingPoint;
 
 	boolean isCallingPoint = false;
@@ -128,8 +128,7 @@ public class ServiceDetailsSAXHandler extends DefaultHandler {
 	public void characters(char ch[], int start, int length) {			
 
 		char[] temp = new char[length];
-		System.arraycopy(ch, start, temp, 0, length);			
-		String v = String.valueOf(temp);			
+		System.arraycopy(ch, start, temp, 0, length);						
 		sb.append(temp);
 	}
 
