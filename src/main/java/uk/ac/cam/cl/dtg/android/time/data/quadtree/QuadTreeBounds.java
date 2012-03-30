@@ -145,7 +145,8 @@ public class QuadTreeBounds {
 		super();
 	}
 	
-	public String toString() {
+	@Override
+  public String toString() {
 		return "[ (" + this.left+"/"+this.bottom+") -> ("+this.right+"/"+this.top+") ]";
 	}
 	

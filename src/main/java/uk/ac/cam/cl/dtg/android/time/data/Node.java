@@ -109,6 +109,7 @@ public class Node<T> {
        this.data = data;
    }
     
+   @Override
    public String toString() {
        StringBuilder sb = new StringBuilder();
        sb.append("{").append(getData().toString()).append(",[");

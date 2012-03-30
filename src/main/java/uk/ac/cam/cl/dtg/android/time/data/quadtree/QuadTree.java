@@ -122,7 +122,8 @@ public class QuadTree<E> {
 	    	return theItems;
 	    }
 	
-	public String toString() {
+	@Override
+  public String toString() {
 		return topNode.toString();
 	}
 }

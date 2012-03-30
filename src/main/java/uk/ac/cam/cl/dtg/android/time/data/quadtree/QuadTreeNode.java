@@ -181,6 +181,7 @@ class QuadTreeNode<E> {
 		for(QuadTreeNode<E> child : childNodes) child.setDetailDecayFactor(detailDecayFactor);
 	}
     
+    @Override
     public String toString() {
      	return "[NODE Level " + Depth + " "+coordx+"/"+coordy+" covers "+Bounds+" items: "+items.size()+" Children: "+childNodes.size()+"]\n";
      	  

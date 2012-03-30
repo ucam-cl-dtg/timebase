@@ -72,7 +72,8 @@ public class BusStop implements Serializable {
 		return stopRef;
 	}
 	
-	public String toString() {
+	@Override
+  public String toString() {
 		return Name+" ("+stopRef+", "+Latitude+"/"+Longitude+")\n";
 		//return Name;
 	}

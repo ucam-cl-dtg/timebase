@@ -54,7 +54,8 @@ public class BusArrival implements Serializable {
 		this.dueTime = new ArrivalTime(dueTime);
 	}
 
-	public String toString() {
+	@Override
+  public String toString() {
 		return serviceID + " to "+destination+" (" + dueTime + ")";
 	}
 }

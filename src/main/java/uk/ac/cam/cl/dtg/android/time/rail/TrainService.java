@@ -103,7 +103,8 @@ public class TrainService {
 	public void setVia(String via) {
 		this.via = via;
 	}
-	public String toString() {
+	@Override
+  public String toString() {
 		return "[" + sta + "] "+originName+"-"+destName + "("+eta+") Operated by "+TOC+" platform? "+platform;
 	}
 

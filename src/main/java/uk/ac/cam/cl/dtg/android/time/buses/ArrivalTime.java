@@ -96,7 +96,8 @@ public class ArrivalTime extends Date implements Serializable {
 		
 	}
 	
-	public String toString() {
+	@Override
+  public String toString() {
 		
 		if(isDue) return "Due";
 		if(isUnknown) return "Unknown";

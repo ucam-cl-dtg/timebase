@@ -55,7 +55,8 @@ public class QuadTreeItem<E> implements Comparable<QuadTreeItem<E>> {
 		this.y = y;
 	}
 	
-	public String toString() {
+	@Override
+  public String toString() {
 		//return element+" at ("+x+", "+y+")";
 		return element.toString();
 	}

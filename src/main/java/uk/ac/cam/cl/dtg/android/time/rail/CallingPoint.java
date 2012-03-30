@@ -21,7 +21,8 @@ public class CallingPoint {
 	
 	public Vector<Vector<CallingPoint>> branches = new Vector<Vector<CallingPoint>>();
 	
-	public String toString() {
+	@Override
+  public String toString() {
 		return location + " @ " + scheduled;
 	}
 	

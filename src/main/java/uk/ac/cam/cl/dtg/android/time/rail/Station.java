@@ -30,7 +30,8 @@ public class Station implements Serializable {
 		System.out.println("Is "+s+" equal to "+this);
 		return (s.CRS == CRS);
 	}
-	public String toString() {
+	@Override
+  public String toString() {
 		return getName() + " (" + getCRS() + ")";
 	}
 	

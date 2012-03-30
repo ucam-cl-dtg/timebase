@@ -13,7 +13,8 @@ public class Destination implements Comparable<Destination> {
 		this.dest = dest;
 	}
 	
-	public String toString() {
+	@Override
+  public String toString() {
 		
 		return service.std+" to "+service.destinations.firstElement().name+" arrives at"+dest.scheduled;
 	}
