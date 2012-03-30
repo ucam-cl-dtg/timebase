@@ -288,8 +288,7 @@ public class LiveDepartureBoard {
 		try {
 			sp = spf.newSAXParser();
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SAXException(e);
 		}
 
 		/* Get the XMLReader of the SAXParser we created. */
