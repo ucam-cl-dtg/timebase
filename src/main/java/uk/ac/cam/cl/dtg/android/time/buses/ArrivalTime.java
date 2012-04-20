@@ -10,14 +10,15 @@ import java.util.GregorianCalendar;
 public class ArrivalTime extends Date implements Serializable {
 	
 	private static final long serialVersionUID = -7891776024595687288L;
+	private static final long HALF_HOUR = 1800000;
+	private static final long DAY = 86400000;
 	
 	public boolean isDue = false;
 	public boolean isUnknown = false;
 	public boolean isLiveData = false;
 	
 	public ArrivalTime(long time) {
-		super();
-		this.setTime(time);
+	  super(time);
 	}
 
 	public ArrivalTime(String arrivalString) {
@@ -67,7 +68,7 @@ public class ArrivalTime extends Date implements Serializable {
 			// Is the time specified tomorrow? If so move day on.
 			if(currHours > hours) {
 				
-				setTime(getTime() + 86400000); // 1 day
+				setTime(getTime() + DAY); // 1 day
 				
 			}
 			
@@ -104,7 +105,7 @@ public class ArrivalTime extends Date implements Serializable {
 		
 		// Calculate the time in half an hour
 		Date cutoff = new Date();
-		cutoff.setTime(cutoff.getTime() + 1800000);
+		cutoff.setTime(cutoff.getTime() + HALF_HOUR);
 		
 		//System.out.println("Arrival time: "+this.getHours()+":"+this.getMinutes()+" cutoff "+cutoff.getHours()+":"+cutoff.getMinutes());
 
