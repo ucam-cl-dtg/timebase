@@ -28,11 +28,11 @@ public class ArrivalTime extends Date implements Serializable {
 		/* is the string of the form "xyz minutes"?
 		 * if so then simply add onto the current time
 		 */
-		
-		if(arrivalString.contains(" mins")) {
+		int minsPosition = arrivalString.indexOf(" mins");
+		if(minsPosition != -1) {
 			
 			// Get integer value of
-			int minsTime = Integer.parseInt(arrivalString.replace(" mins", ""));
+			int minsTime = Integer.parseInt(arrivalString.substring(0, minsPosition));
 			
 			// Work out how many millis this the time is
 			int millis = minsTime * 60 * 1000;
