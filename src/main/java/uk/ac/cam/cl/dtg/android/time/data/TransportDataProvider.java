@@ -24,6 +24,7 @@ import uk.ac.cam.cl.dtg.android.time.data.handlers.GetStopsSAXHandler;
 import uk.ac.cam.cl.dtg.android.time.data.handlers.SAXDataHandler;
 import uk.ac.cam.cl.dtg.android.time.data.handlers.StopGroupsSAXHandler;
 import uk.ac.cam.cl.dtg.android.time.data.handlers.StopSAXHandler;
+import uk.ac.cam.cl.dtg.android.time.data.handlers.StopsSAXHandler;
 
 public class TransportDataProvider {
 
@@ -57,6 +58,10 @@ public class TransportDataProvider {
       throws TransportDataException {
     return makeRequest("FindStopGroups", "&method=within" + "&left=" + left + "&top=" + top
         + "&right=" + right + "&bottom=" + bottom, new StopGroupsSAXHandler());
+  }
+
+  public List<BusStop> getBusStopsInGroup(String group) throws TransportDataException {
+    return makeRequest("ListStopPoints", "&groupref=" + group, new StopsSAXHandler());
   }
 
   /**
