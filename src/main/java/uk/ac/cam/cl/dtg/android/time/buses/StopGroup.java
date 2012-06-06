@@ -2,6 +2,7 @@ package uk.ac.cam.cl.dtg.android.time.buses;
 
 public class StopGroup extends AbstractStop {
 
+  private static final long serialVersionUID = 1L;
   private String ref;
   private String dist;
   public StopGroup(String name, double latitude, double longitude) {

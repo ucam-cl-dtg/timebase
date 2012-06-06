@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class BusStop extends AbstractStop implements Serializable {
 
-  private static final long serialVersionUID = -2339048398866898322L;
+  private static final long serialVersionUID = 2;
 
   private String atcoCode = "";
   private String naptanCode = "";
