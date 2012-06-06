@@ -9,7 +9,9 @@ public class TransportDataException extends Exception {
 	}
 	public TransportDataException(Throwable t) {
 	  super(t);
-	  setStackTrace(t.getStackTrace());
 	}
+  public TransportDataException(String message, Exception e) {
+    super(message,e);
+  }
 
 }

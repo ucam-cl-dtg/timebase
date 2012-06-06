@@ -131,7 +131,7 @@ public class TransportDataProvider {
 
     } catch (Exception e) {
 
-      throw new TransportDataException(e);
+      throw new TransportDataException(service + query, e);
 
     }
   }
