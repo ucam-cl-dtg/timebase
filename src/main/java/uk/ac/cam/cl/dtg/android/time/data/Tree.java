@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Represents a Tree of Objects of generic type T. The Tree is represented as
- * a single rootElement which points to a List<Node<T>> of children. There is
+ * a single rootElement which points to a {@code List<Node<T>>} of children. There is
  * no restriction on the number of children that a particular node may have.
  * This Tree provides a method to serialize the Tree into a List by doing a
  * pre-order traversal. It has several methods to allow easy updation of Nodes
@@ -39,9 +39,9 @@ public class Tree<T> {
     }
      
     /**
-     * Returns the Tree<T> as a List of Node<T> objects. The elements of the
+     * Returns the Tree as a List of Node objects. The elements of the
      * List are generated from a pre-order traversal of the tree.
-     * @return a List<Node<T>>.
+     * @return a {@code List<Node<T>>}.
      */
     public List<Node<T>> toList() {
         List<Node<T>> list = new ArrayList<Node<T>>();

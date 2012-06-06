@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* Represents a node of the Tree<T> class. The Node<T> is also a container, and
+* Represents a node of the {@link Tree} class. The Node is also a container, and
 * can be thought of as instrumentation to determine the location of the type T
-* in the Tree<T>.
+* in the Tree.
+* @param <T>
 */
 public class Node<T> {
 
@@ -14,14 +15,14 @@ public class Node<T> {
    public List<Node<T>> children;
 
    /**
-    * Default ctor.
+    * Default constructor.
     */
    public Node() {
        super();
    }
 
    /**
-    * Convenience ctor to create a Node<T> with an instance of T.
+    * Convenience constructor to create a Node with an instance of T.
     * @param data an instance of T.
     */
    public Node(T data) {
@@ -30,11 +31,11 @@ public class Node<T> {
    }
     
    /**
-    * Return the children of Node<T>. The Tree<T> is represented by a single
-    * root Node<T> whose children are represented by a List<Node<T>>. Each of
-    * these Node<T> elements in the List can have children. The getChildren()
-    * method will return the children of a Node<T>.
-    * @return the children of Node<T>
+    * Return the children of Node. The Tree is represented by a single
+    * root Node whose children are represented by a {@code List<Node<T>>}. Each of
+    * these Node elements in the List can have children. The getChildren()
+    * method will return the children of a Node.
+    * @return the children of Node
     */
    public List<Node<T>> getChildren() {
        if (this.children == null) {
@@ -44,16 +45,16 @@ public class Node<T> {
    }
 
    /**
-    * Sets the children of a Node<T> object. See docs for getChildren() for
+    * Sets the children of a Node object. See docs for getChildren() for
     * more information.
-    * @param children the List<Node<T>> to set.
+    * @param children the {@code List<Node<T>>} to set.
     */
    public void setChildren(List<Node<T>> children) {
        this.children = children;
    }
 
    /**
-    * Returns the number of immediate children of this Node<T>.
+    * Returns the number of immediate children of this Node.
     * @return the number of immediate children.
     */
    public int getNumberOfChildren() {
@@ -64,9 +65,9 @@ public class Node<T> {
    }
     
    /**
-    * Adds a child to the list of children for this Node<T>. The addition of
-    * the first child will create a new List<Node<T>>.
-    * @param child a Node<T> object to set.
+    * Adds a child to the list of children for this Node. The addition of
+    * the first child will create a new {@code List<Node<T>>}.
+    * @param child a Node object to set.
     */
    public void addChild(Node<T> child) {
        if (children == null) {
@@ -76,9 +77,10 @@ public class Node<T> {
    }
     
    /**
-    * Inserts a Node<T> at the specified position in the child list. Will     * throw an ArrayIndexOutOfBoundsException if the index does not exist.
+    * Inserts a Node at the specified position in the child list. Will
+    * throw an ArrayIndexOutOfBoundsException if the index does not exist.
     * @param index the position to insert at.
-    * @param child the Node<T> object to insert.
+    * @param child the Node object to insert.
     * @throws IndexOutOfBoundsException if thrown.
     */
    public void insertChildAt(int index, Node<T> child) throws IndexOutOfBoundsException {
@@ -93,7 +95,7 @@ public class Node<T> {
    }
     
    /**
-    * Remove the Node<T> element at index index of the List<Node<T>>.
+    * Remove the Node element at index index of the {@code List<Node<T>>}.
     * @param index the index of the element to delete.
     * @throws IndexOutOfBoundsException if thrown.
     */
