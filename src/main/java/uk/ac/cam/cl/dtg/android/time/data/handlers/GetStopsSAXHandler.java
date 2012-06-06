@@ -14,7 +14,7 @@ import uk.ac.cam.cl.dtg.android.time.buses.BusStop;
  * @author dt316
  *
  */
-public class GetStopsSAXHandler extends DefaultHandler {
+public class GetStopsSAXHandler extends DefaultHandler implements SAXDataHandler<List<BusStop>> {
 
 
 	// Temp storage
@@ -104,7 +104,8 @@ public class GetStopsSAXHandler extends DefaultHandler {
 		sb.append(temp);
 	}
 	
-	public List<BusStop> getData() {
+	@Override
+  public List<BusStop> getData() {
 		return parsedData;
 	}
 }

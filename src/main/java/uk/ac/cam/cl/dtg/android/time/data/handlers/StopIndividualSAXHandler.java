@@ -12,7 +12,7 @@ import uk.ac.cam.cl.dtg.android.time.buses.*;
  * @author dt316
  *
  */
-public class StopIndividualSAXHandler extends DefaultHandler {
+public class StopIndividualSAXHandler extends DefaultHandler implements SAXDataHandler<BusStop> {
 
 
 	// Temp storage
@@ -96,7 +96,8 @@ public class StopIndividualSAXHandler extends DefaultHandler {
 		sb.append(temp);
 	}
 	
-	public BusStop getData() {
+	@Override
+  public BusStop getData() {
 		return stop;
 	}
 }

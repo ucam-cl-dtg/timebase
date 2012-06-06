@@ -14,7 +14,7 @@ import uk.ac.cam.cl.dtg.android.time.buses.BusArrivalData;
  * @author dt316
  *
  */
-public class ArrivalsSAXHandler extends DefaultHandler {
+public class ArrivalsSAXHandler extends DefaultHandler implements SAXDataHandler<BusArrivalData> {
 
 
 	// Temp storage
@@ -128,7 +128,8 @@ public class ArrivalsSAXHandler extends DefaultHandler {
 		sb.append(temp);
 	}
 	
-	public BusArrivalData getData() {
+	@Override
+  public BusArrivalData getData() {
 		return data;
 	}
 }

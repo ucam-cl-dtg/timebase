@@ -14,7 +14,7 @@ import uk.ac.cam.cl.dtg.android.time.buses.StopGroup;
  * @author dt316
  *
  */
-public class StopGroupsSAXHandler extends DefaultHandler {
+public class StopGroupsSAXHandler extends DefaultHandler implements SAXDataHandler<List<StopGroup>> {
 
 
 	// Temp storage
@@ -98,7 +98,8 @@ public class StopGroupsSAXHandler extends DefaultHandler {
 		sb.append(temp);
 	}
 	
-	public List<StopGroup> getData() {
+	@Override
+  public List<StopGroup> getData() {
 		return parsedData;
 	}
 }
