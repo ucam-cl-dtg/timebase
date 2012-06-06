@@ -70,7 +70,7 @@ public class StopIndividualSAXHandler extends DefaultHandler {
 			
 		} else if(qName.equals("ref")) {
 			
-			stop.setStopRef(v);
+			stop.setAtcoCode(v);
 			
 		} else if(qName.equals("lat")) {
 			

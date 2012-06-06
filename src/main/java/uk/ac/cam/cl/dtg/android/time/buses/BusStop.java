@@ -7,83 +7,49 @@ import java.util.HashMap;
  * Represents a bus stop
  * 
  * @author dt316
- *
+ * 
  */
-public class BusStop implements Serializable {
-	
-	private static final long serialVersionUID = -2339048398866898322L;
+public class BusStop extends AbstractStop implements Serializable {
 
-	private String Name = "";
-	private double Latitude;
-	private double Longitude;
-	private String stopRef = "";
-	private String smsCode = "";
-	private HashMap<String, Object> meta = new HashMap<String, Object>();
+  private static final long serialVersionUID = -2339048398866898322L;
 
+  private String atcoCode = "";
+  private String naptanCode = "";
+  private HashMap<String, Object> meta = new HashMap<String, Object>();
 
-	public BusStop(String name, double latitude, double longitude,
-			String stopRef) {
-		
-		super();
-		Latitude = latitude;
-		Longitude = longitude;
-		Name = name;
-		this.stopRef = stopRef;
-		
-	}
-	
-	public void setMeta(String tag, Object obj) {
-		meta.put(tag, obj);
-	}
-	
-	public Object getMeta(String tag) {
-		return meta.get(tag);
-	}
+  public BusStop(String name, double latitude, double longitude, String atcoCode) {
 
-	public void setName(String name) {
-		Name = name;
-	}
+    super(name, latitude, longitude);
+    this.atcoCode = atcoCode;
 
-	public String getName() {
-		return Name;
-	}
+  }
 
-	public void setLatitude(double latitude) {
-		Latitude = latitude;
-	}
+  public void setMeta(String tag, Object obj) {
+    meta.put(tag, obj);
+  }
 
-	public double getLatitude() {
-		return Latitude;
-	}
+  public Object getMeta(String tag) {
+    return meta.get(tag);
+  }
 
-	public void setLongitude(double longitude) {
-		Longitude = longitude;
-	}
+  public void setAtcoCode(String atco) {
+    this.atcoCode = atco;
+  }
 
-	public double getLongitude() {
-		return Longitude;
-	}
+  public String getAtcoCode() {
+    return atcoCode;
+  }
 
-	public void setStopRef(String stopRef) {
-		this.stopRef = stopRef;
-	}
+  public void setNaptanCode(String naptan) {
+    this.naptanCode = naptan;
+  }
 
-	public String getStopRef() {
-		return stopRef;
-	}
-	
-	@Override
-  public String toString() {
-		return Name+" ("+stopRef+", "+Latitude+"/"+Longitude+")\n";
-		//return Name;
-	}
+  public String getNaptanCode() {
+    return naptanCode;
+  }
 
-	public void setSmsCode(String smsCode) {
-		this.smsCode = smsCode;
-	}
-
-	public String getSmsCode() {
-		return smsCode;
-	}
-	
+  @Override
+  public String getRef() {
+    return getAtcoCode();
+  }
 }

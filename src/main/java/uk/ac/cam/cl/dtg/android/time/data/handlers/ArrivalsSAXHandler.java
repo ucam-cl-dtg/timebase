@@ -49,7 +49,7 @@ public class ArrivalsSAXHandler extends DefaultHandler {
 		
 		if(qName.equals("arrivals")) {
 
-			data.Timestamp = atts.getValue("timestamp");
+			data.setTimestamp(atts.getValue("timestamp"));
 			
 		} else if(qName.equals("arrival")) {
 			
@@ -86,11 +86,11 @@ public class ArrivalsSAXHandler extends DefaultHandler {
 			
 		} else if(qName.equals("name")) {
 			
-			data.stopName = v;
+			data.setStopName(v);
 			
 		} else if(qName.equals("smscode")) {
 			
-			data.smsCode = v;
+			data.setNaptanCode(v);
 			
 		} else if(qName.equals("millis")) {
 			
@@ -110,7 +110,7 @@ public class ArrivalsSAXHandler extends DefaultHandler {
 			
 		} else if(qName.equals("arrival")) {
 			
-			data.NextBuses.add(currArrival);
+			data.getNextBuses().add(currArrival);
 			
 		} else if(qName.equals("error")) {
 			

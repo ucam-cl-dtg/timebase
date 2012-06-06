@@ -73,7 +73,7 @@ public class GetStopsSAXHandler extends DefaultHandler {
 			
 		} else if(qName.equals("ref")) {
 			
-			currentStop.setStopRef(v);
+			currentStop.setAtcoCode(v);
 			
 		} else if(qName.equals("lat")) {
 			
