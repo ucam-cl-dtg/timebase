@@ -4,6 +4,11 @@
   <groupId>uk.ac.cam.cl.dtg.android.time</groupId>
   <artifactId>TIMEBase</artifactId>
   <version>0.0.2-SNAPSHOT</version>
+  <scm>
+    <connection>scm:git:git://github.com/ucam-cl-dtg/timebase.git</connection>
+    <developerConnection>scm:git:git@github.com:ucam-cl-dtg/timebase.git</developerConnection>
+    <url>https://github.com/ucam-cl-dtg/timebase</url>
+  </scm>
   <dependencies>
     <dependency>
       <groupId>org.json</groupId>
