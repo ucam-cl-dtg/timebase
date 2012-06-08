@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>uk.ac.cam.cl.dtg.android.time</groupId>
   <artifactId>TIMEBase</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3-SNAPSHOT</version>
   <scm>
     <connection>scm:git:git://github.com/ucam-cl-dtg/timebase.git</connection>
     <developerConnection>scm:git:git@github.com:ucam-cl-dtg/timebase.git</developerConnection>
