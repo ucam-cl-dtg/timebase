@@ -24,8 +24,21 @@ public class BusArrival implements Serializable {
 		serviceID = service;
 		destination = dest;
 		this.dueTime = new ArrivalTime(dueTime);
-	}
-	
+  }
+
+  /**
+   * 
+   * @param service
+   * @param destination
+   * @param dueTime
+   * @since 0.0.4
+   */
+  public BusArrival(String service, String destination, ArrivalTime dueTime) {
+    this.serviceID = service;
+    this.destination = destination;
+    this.dueTime = dueTime;
+  }
+
 	public String getServiceID() {
 		return serviceID;
 	}
