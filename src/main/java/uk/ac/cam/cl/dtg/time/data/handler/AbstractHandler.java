@@ -33,7 +33,28 @@ public abstract class AbstractHandler implements QueryHandler {
       List<BusStop> stops = getAllStops();
 
       // Output about how many stops we've fetched
-      log.log(Level.INFO, "[" + sourceID + "] Fetched " + stops.size() + " stops from server");
+      int numberOfFetchedStops = stops.size();
+      log.log(Level.INFO, "[" + sourceID + "] Fetched " + numberOfFetchedStops
+          + " stops from server");
+      PreparedStatement count =
+          conn.prepareStatement("SELECT COUNT(*) FROM available_stops WHERE data_source=?");
+      try {
+        count.setString(1, sourceID);
+        ResultSet rs = count.executeQuery();
+        if (rs.next()) {
+          int numberOfExistingStops = rs.getInt(1);
+          // If the number of stops decreases by more than 10% in one go then we assume that the
+          // server failed to give us all the stops and ignore it.
+          if (numberOfFetchedStops < numberOfExistingStops * 0.9) {
+            log.log(Level.WARNING, "[" + sourceID + "] Fetched " + numberOfFetchedStops
+                + " stops from server but we had " + numberOfExistingStops
+                + " from last time so we are ignoring the response as invalid");
+            return;
+          }
+        }
+      } finally {
+        count.close();
+      }
 
       PreparedStatement empty =
           conn.prepareStatement("DELETE FROM available_stops WHERE data_source=?");
